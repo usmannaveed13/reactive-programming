@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("reactive-math")
@@ -35,7 +36,9 @@ public class ReactiveMathController {
     }
 
     @PostMapping("multiply")
-    public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDtoMono) {
+    public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDtoMono,
+                                   @RequestHeader Map<String, String> headers) {
+        System.out.println(headers);
         return this.mathService.multiply(requestDtoMono);
     }
 
